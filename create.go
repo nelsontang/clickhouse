@@ -36,7 +36,9 @@ func (dialector *Dialector) Create(db *gorm.DB) {
 					if _, err := stmt.Exec(value...); db.AddError(err) != nil {
 						return
 					}
+					db.RowsAffected++
 				}
+				db.Statement.SQL.Reset()
 				return
 			}
 		}
